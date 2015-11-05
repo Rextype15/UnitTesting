@@ -41,7 +41,7 @@ public class TacitKnowledgePrinter {
         return "" + number;
     }
 
-    private boolean isDivisibleBy(int dividend, int divisor) {
+    public boolean isDivisibleBy(int dividend, int divisor) {
         return dividend % divisor == 0;
     }
 

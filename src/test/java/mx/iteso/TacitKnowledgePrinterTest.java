@@ -1,56 +1,55 @@
 package mx.iteso;
 
+import org.junit.Before;
 import org.junit.Test;
+
 
 import static org.junit.Assert.*;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 public class TacitKnowledgePrinterTest {
 
-    //Test printNumbers with a limit of 10
-        //Verify calculate being called 10 times
-        //Verify expected result
-
-    //Test printNumbers with a limit of 0
-        //Verify Exception
-
-    //What else can we test?
-        //What should we verify?
 
     private Printer printer;
-    private TacitKnowledgePrinterTest tkPrinterTest;
+    private TacitKnowledgePrinter tkPrinterTest;
+
 
     @Before
     public void setUp() {
         printer = mock(Printer.class);
-        tkPrinterTest = new TacitKnowledgePrinterTest(printer);
+        tkPrinterTest = new TacitKnowledgePrinter(printer);
     }
 
     @Test
-    public void Verify10Times() {
+    public void VerifyPrint10Times() {
         tkPrinterTest.printNumbers(10);
-        verify(printer, times(10)).printNumbers(anyString());
+        verify(tkPrinterTest, times(10)).printNumbers(anyInt());
+    }
+
+    @Test
+    public void VerifyCalculate10Times() {
+        tkPrinterTest.printNumbers(10);
+        verify(tkPrinterTest, times(10)).calculate(anyInt());
     }
 
     @Test
     public void VerifyExpectedResult() {
-        tkPrinterTest.calculate(2);
-        verify(printer, "12")
+        assertEquals(tkPrinterTest.calculate(2),"2");
     }
 
-    @Test(expected = RuntimeExpection.class)
+    @Test(expected = RuntimeException.class)
     public void ExceptionWhenLimit0() {
         tkPrinterTest.printNumbers(0);
     }
 
     @Test
     public void ExtraTest() {
-        tkPrinterTest.isDivisibleby(2,2);
-        verify(printer, true);
-    }
-
-    @Test
-    public void forbiddenTest() {
-        assertTrue(true);
+        assertEquals(tkPrinterTest.isDivisibleBy(2, 2), true);
     }
 
 }
